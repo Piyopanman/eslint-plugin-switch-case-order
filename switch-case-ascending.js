@@ -10,7 +10,22 @@ module.exports = {
   },
   create(context) {
     return {
-      // TODO: add callback function(s)
+      // caseラベルに'apple'が含まれていることを強制するルールを作ってみる
+      SwitchStatement(node) {
+        const hasAppleCase = node.cases.some(
+          (caseNode) =>
+            caseNode.test &&
+            caseNode.test.type === "Literal" &&
+            caseNode.test.value === "apple"
+        );
+
+        if (!hasAppleCase) {
+          context.report({
+            node,
+            message: "switch statement dont have apple case.",
+          });
+        }
+      },
     };
   },
 };
