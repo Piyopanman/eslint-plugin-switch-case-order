@@ -9,7 +9,7 @@ ruleTester.run("switch-case-ascending", rule, {
   valid: [
     {
       code: `
-    switch(test) {
+    switch(fruit) {
         case "apple":
             console.log("apple!!");
         case "banana":
@@ -25,11 +25,13 @@ ruleTester.run("switch-case-ascending", rule, {
   invalid: [
     {
       code: `
-      switch(test) {
-        case "banana":
-            console.log("banana!!");
+      switch(fruit) {
+        case "apple":
+            console.log("apple!!");
         case "cherry":
             console.log("cherry!!");
+        case "banana":
+            console.log("banana!!");
         default:
            console.log("this is default");
     }

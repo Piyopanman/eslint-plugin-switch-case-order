@@ -10,21 +10,30 @@ module.exports = {
   },
   create(context) {
     return {
-      // caseラベルに'apple'が含まれていることを強制するルールを作ってみる
       SwitchStatement(node) {
-        const hasAppleCase = node.cases.some(
-          (caseNode) =>
-            caseNode.test &&
-            caseNode.test.type === "Literal" &&
-            caseNode.test.value === "apple"
-        );
+        this.prevName = null;
+      },
 
-        if (!hasAppleCase) {
+      SwitchCase(node) {
+        const currentName =
+          node.test && node.test.type === "Literal"
+            ? node.test.value
+            : undefined;
+
+        if (typeof currentName !== "string") return;
+
+        if (this.prevName && currentName < this.prevName) {
           context.report({
             node,
-            message: "switch statement dont have apple case.",
+            message:
+              'Case labels in switch statement are not in ascending alphabetical order: "{{ prevName }}" comes before "{{ currentName }}"',
+            data: {
+              prevName: this.prevName,
+              currentName: currentName,
+            },
           });
         }
+        this.prevName = currentName;
       },
     };
   },
