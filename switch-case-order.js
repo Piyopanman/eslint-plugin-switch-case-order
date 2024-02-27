@@ -12,8 +12,8 @@ module.exports = {
         properties: {
           caseSensitive: { type: "boolean" },
           natural: { type: "boolean" },
-          additionalProperties: false,
         },
+        additionalProperties: false,
       },
     ],
   },
