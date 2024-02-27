@@ -15,7 +15,7 @@ module.exports = [
       "switch-case-order/switch-case-order": [
         "error",
         "asc",
-        { natural: true },
+        { natural: true, caseSensitive: true },
       ],
     },
   },

@@ -35,32 +35,32 @@
 // }
 
 // 1,2,3,10 (natural)
-switch (fruit) {
-  case "1":
-    console.log("1!!");
-  case "2":
-    console.log("2!!");
-  case "3":
-    console.log("3!!");
-  case "10":
-    console.log("3!!");
-  default:
-    console.log("this is default");
-}
+// switch (fruit) {
+//   case "1":
+//     console.log("1!!");
+//   case "2":
+//     console.log("2!!");
+//   case "3":
+//     console.log("3!!");
+//   case "10":
+//     console.log("3!!");
+//   default:
+//     console.log("this is default");
+// }
 
 // 1,2,3,10 (unnatural)
-switch (fruit) {
-  case "1":
-    console.log("1!!");
-  case "10":
-    console.log("3!!");
-  case "2":
-    console.log("2!!");
-  case "3":
-    console.log("3!!");
-  default:
-    console.log("this is default");
-}
+// switch (fruit) {
+//   case "1":
+//     console.log("1!!");
+//   case "10":
+//     console.log("3!!");
+//   case "2":
+//     console.log("2!!");
+//   case "3":
+//     console.log("3!!");
+//   default:
+//     console.log("this is default");
+// }
 
 // switch (fruit) {
 //   case "1":
@@ -71,6 +71,33 @@ switch (fruit) {
 //     console.log("3!!");
 //   case "10":
 //     console.log("3!!");
+//   default:
+//     console.log("this is default");
+// }
+
+// caseSensitiveだと通らない
+// switch (fruit) {
+//   case "a":
+//     console.log("apple!!");
+//   case "b":
+//     console.log("banana!!");
+//   case "C":
+//     console.log("cherry!!");
+//   case "c":
+//     console.log("cherry!!");
+//   default:
+//     console.log("this is default");
+// }
+
+// switch (fruit) {
+//   case "a":
+//     console.log("apple!!");
+//   case "b":
+//     console.log("banana!!");
+//   case "b":
+//     console.log("cherry!!");
+//   case "c":
+//     console.log("cherry!!");
 //   default:
 //     console.log("this is default");
 // }

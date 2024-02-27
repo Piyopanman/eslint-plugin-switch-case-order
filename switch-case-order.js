@@ -17,7 +17,7 @@ module.exports = {
       {
         type: "object",
         properties: {
-          // caseSensitive: { type: "boolean" },
+          caseSensitive: { type: "boolean" },
           natural: { type: "boolean" },
           additionalProperties: false,
         },
@@ -27,25 +27,35 @@ module.exports = {
   create(context) {
     const order = context.options[0] ?? "asc";
     const options = context.options[1] ?? {};
+    const caseSensitive = options.caseSensitive ?? true;
     const natural = options.natural ?? true;
 
-    const isValidOrder = (order, natural, prevName, currentName) => {
+    const isValidOrder = (
+      order,
+      caseSensitive,
+      natural,
+      prevName,
+      currentName
+    ) => {
       if (!prevName) return true;
 
       let prev = prevName;
       let current = currentName;
 
+      if (!caseSensitive) {
+        prev = prev.toLowerCase();
+        current = current.toLowerCase();
+      }
+
       if (natural) {
-        prev = isNaN(parseInt(prevName)) ? prevName : parseInt(prevName);
-        current = isNaN(parseInt(currentName))
-          ? currentName
-          : parseInt(currentName);
+        prev = isNaN(parseInt(prev)) ? prev : parseInt(prev);
+        current = isNaN(parseInt(current)) ? current : parseInt(current);
       }
 
       if (order === "asc") {
-        return prev < current;
+        return prev <= current;
       } else if (order === "desc") {
-        return prev > current;
+        return prev >= current;
       }
     };
 
@@ -62,15 +72,24 @@ module.exports = {
 
         if (typeof currentName !== "string") return;
 
-        if (!isValidOrder(order, natural, this.prevName, currentName)) {
+        if (
+          !isValidOrder(
+            order,
+            caseSensitive,
+            natural,
+            this.prevName,
+            currentName
+          )
+        ) {
           context.report({
             node,
             message:
-              'Case labels in switch statement must be in {{ natural }} {{ order }}ending order: "{{ current }}" shoud be before "{{ prev }}"',
+              'Case labels in switch statement must be in {{ caseSensitive }} {{ natural }} {{ order }}ending order: "{{ current }}" shoud be before "{{ prev }}"',
             data: {
               prev: this.prevName,
               current: currentName,
               order: order,
+              caseSensitive: caseSensitive ? "sensitive" : "insensitive",
               natural: natural ? "natural" : "unnatural",
             },
           });
