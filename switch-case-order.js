@@ -18,25 +18,34 @@ module.exports = {
         type: "object",
         properties: {
           // caseSensitive: { type: "boolean" },
-          // natural: { type: "boolean" },
+          natural: { type: "boolean" },
           additionalProperties: false,
         },
       },
     ],
   },
   create(context) {
-    const options = context.options;
-    const order = options[0] ?? "asc";
-    // const caseSensitive = options[1].caseSensitive ?? "true";
-    // const natural = options[1].natural ?? "true";
+    const order = context.options[0] ?? "asc";
+    const options = context.options[1] ?? {};
+    const natural = options.natural ?? true;
 
-    const isValidOrder = (order, prevName, currentName) => {
+    const isValidOrder = (order, natural, prevName, currentName) => {
       if (!prevName) return true;
 
+      let prev = prevName;
+      let current = currentName;
+
+      if (natural) {
+        prev = isNaN(parseInt(prevName)) ? prevName : parseInt(prevName);
+        current = isNaN(parseInt(currentName))
+          ? currentName
+          : parseInt(currentName);
+      }
+
       if (order === "asc") {
-        return prevName < currentName;
+        return prev < current;
       } else if (order === "desc") {
-        return prevName > currentName;
+        return prev > current;
       }
     };
 
@@ -53,28 +62,16 @@ module.exports = {
 
         if (typeof currentName !== "string") return;
 
-        // if (this.prevName && currentName < this.prevName) {
-        //   context.report({
-        //     node,
-        //     message:
-        //       'Case labels in switch statement are not in ascending alphabetical order: "{{ prevName }}" comes before "{{ currentName }}"',
-        //     data: {
-        //       prevName: this.prevName,
-        //       currentName: currentName,
-        //     },
-        //   });
-        // }
-
-        if (!isValidOrder(order, this.prevName, currentName)) {
+        if (!isValidOrder(order, natural, this.prevName, currentName)) {
           context.report({
             node,
             message:
-              // 'Case labels in switch statement are not in ascending alphabetical order: "{{ prevName }}" comes before "{{ currentName }}"',
-              'Case labels in switch statement are not in valid order({{ order }}): "{{ prevName }}" comes before "{{ currentName }}"',
+              'Case labels in switch statement must be in {{ natural }} {{ order }}ending order: "{{ current }}" shoud be before "{{ prev }}"',
             data: {
-              prevName: this.prevName,
-              currentName: currentName,
+              prev: this.prevName,
+              current: currentName,
               order: order,
+              natural: natural ? "natural" : "unnatural",
             },
           });
         }

@@ -12,7 +12,11 @@ module.exports = [
     },
     plugins: { "switch-case-order": eslintPluginExample },
     rules: {
-      "switch-case-order/switch-case-order": ["error", "desc"],
+      "switch-case-order/switch-case-order": [
+        "error",
+        "asc",
+        { natural: true },
+      ],
     },
   },
 ];
