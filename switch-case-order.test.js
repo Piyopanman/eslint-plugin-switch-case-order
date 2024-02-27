@@ -1,11 +1,11 @@
 const { RuleTester } = require("eslint");
-const rule = require("./switch-case-ascending");
+const rule = require("./switch-case-order");
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 },
 });
 
-ruleTester.run("switch-case-ascending", rule, {
+ruleTester.run("switch-case-order", rule, {
   valid: [
     {
       code: `
