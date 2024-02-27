@@ -1,10 +1,3 @@
-/**
- * option memo
- * {
- * "switch-case-order": ["error", "asc", {"caseSensitive": true, "natural": false}]
- * }
- */
-
 module.exports = {
   meta: {
     type: "layout",
@@ -34,13 +27,13 @@ module.exports = {
       order,
       caseSensitive,
       natural,
-      prevName,
-      currentName
+      prevLabel,
+      currentLabel
     ) => {
-      if (!prevName) return true;
+      if (!prevLabel) return true;
 
-      let prev = prevName;
-      let current = currentName;
+      let prev = prevLabel;
+      let current = currentLabel;
 
       if (!caseSensitive) {
         prev = prev.toLowerCase();
@@ -61,24 +54,24 @@ module.exports = {
 
     return {
       SwitchStatement(node) {
-        this.prevName = null;
+        this.prevLabel = null;
       },
 
       SwitchCase(node) {
-        const currentName =
+        const currentLabel =
           node.test && node.test.type === "Literal"
             ? node.test.value
             : undefined;
 
-        if (typeof currentName !== "string") return;
+        if (typeof currentLabel !== "string") return;
 
         if (
           !isValidOrder(
             order,
             caseSensitive,
             natural,
-            this.prevName,
-            currentName
+            this.prevLabel,
+            currentLabel
           )
         ) {
           context.report({
@@ -86,8 +79,8 @@ module.exports = {
             message:
               'Case labels in switch statement must be in {{ caseSensitive }} {{ natural }} {{ order }}ending order: "{{ current }}" shoud be before "{{ prev }}"',
             data: {
-              prev: this.prevName,
-              current: currentName,
+              prev: this.prevLabel,
+              current: currentLabel,
               order: order,
               caseSensitive: caseSensitive ? "sensitive" : "insensitive",
               natural: natural ? "natural" : "unnatural",
@@ -95,7 +88,7 @@ module.exports = {
           });
         }
 
-        this.prevName = currentName;
+        this.prevLabel = currentLabel;
       },
     };
   },
