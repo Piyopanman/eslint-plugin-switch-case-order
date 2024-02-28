@@ -5,9 +5,9 @@ const eslintPluginExample = require("./eslint-plugin-switch-case-order");
 
 module.exports = [
   {
-    files: ["**/*.js"],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
-      sourceType: "commonjs",
+      sourceType: "module",
       ecmaVersion: "latest",
     },
     plugins: { "switch-case-order": eslintPluginExample },
