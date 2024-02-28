@@ -1,5 +1,5 @@
 const { RuleTester } = require("eslint");
-const rule = require("./switch-case-order");
+const rule = require("../src/switch-case-order");
 
 const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 },

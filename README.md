@@ -44,10 +44,6 @@ npm install eslint eslint-plugin-switch-case-order --save-dev
 
 In `v1.0.0`, `switch-case-order` only applies when the type of case label is string.
 
-## Contributing
-
-Contributions are always welcome!
-
 ## Acknowledgements
 
 The custom rule `switch-case-order` contains options inspired by [sort-keys](https://eslint.org/docs/latest/rules/sort-keys) rule of ESLint.  
