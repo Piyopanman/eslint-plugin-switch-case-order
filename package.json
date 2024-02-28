@@ -1,16 +1,31 @@
 {
   "name": "eslint-plugin-switch-case-order",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Enforce that case labels in switch statements are sorted",
+  "main": "switch-case-order.js",
   "scripts": {
     "test": "node switch-case-order.test.js",
     "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "switch",
+    "case",
+    "sort",
+    "order"
+  ],
+  "author": "Piyopanman",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Piyopanman/eslint-plugin-switch-case-order"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  },
   "devDependencies": {
     "eslint": "^8.57.0"
-  }
+  },
+  "license": "MIT"
 }
