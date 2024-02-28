@@ -34,11 +34,73 @@ npm install eslint eslint-plugin-switch-case-order --save-dev
 2nd option is Object with 2 keys.
 
 - `natural`: Default is `true`. If `false`, this rule forces the case labels to be in unnatural order.
-  - natural order: "1", "2", "3", "10"
-  - unnatural order: "1", "10", "2", "3"
+  - natural order: `"1"`, `"2"`, `"3"`, `"10"`
+  - unnatural order: `"1"`, `"10"`, `"2"`, `"3"`
 - `caseSensitive`: Default is `true`. If `false`, this rule forces the case labels to be in case-insensitive order
-  - case-sensitive: "A", "a", "b", "c"
-  - case-insensitive: "a", "b", "B", "c"
+  - case-sensitive: `"A"`, `"a"`, `"b"`, `"c"`
+  - case-insensitive: `"a"`, `"b"`, `"B"`, `"c"`
+
+## Example
+
+### default option
+
+```javascript
+// invalid
+switch (fruit) {
+  case "apple":
+    console.log("apple!");
+  case "cherry":
+    console.log("cherry!");
+  case "banana":
+    console.log("banana!");
+  default:
+    console.log("default!");
+}
+
+// valid
+switch (fruit) {
+  case "apple":
+    console.log("apple!");
+  case "banana":
+    console.log("banana!");
+  case "cherry":
+    console.log("cherry!");
+  default:
+    console.log("default!");
+}
+```
+
+### `natural` : true
+
+```javascript
+// invalid
+switch (fruit) {
+  case "1":
+    console.log("one!");
+  case "10":
+    console.log("ten!");
+  case "2":
+    console.log("two!");
+  case "3":
+    console.log("three!");
+  default:
+    console.log("default!");
+}
+
+// valid
+switch (fruit) {
+  case "1":
+    console.log("one!");
+  case "2":
+    console.log("two!");
+  case "3":
+    console.log("three!");
+  case "10":
+    console.log("ten!");
+  default:
+    console.log("default!");
+}
+```
 
 ## Note
 
