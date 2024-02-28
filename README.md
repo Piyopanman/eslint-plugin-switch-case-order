@@ -4,8 +4,16 @@ Enforce that case labels in switch statements are sorted
 
 ## Installation
 
+You'll first need to install [ESLint](https://eslint.org/).
+
 ```bash
-npm install eslint eslint-plugin-switch-case-order --save-dev
+npm install eslint --save-dev
+```
+
+Next, install `eslint-plugin-switch-case-order`.
+
+```bash
+npm install eslint-plugin-switch-case-order --save-dev
 ```
 
 ## Configuration
@@ -104,7 +112,7 @@ switch (fruit) {
 
 ## Note
 
-In `v1.0.0`, `switch-case-order` only applies when the type of case label is string.
+In `v1.0.1` (latest), `switch-case-order` only applies when the type of case label is string.
 
 ## Acknowledgements
 
