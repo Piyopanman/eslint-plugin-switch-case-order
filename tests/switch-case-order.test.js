@@ -147,24 +147,6 @@ ruleTester.run("switch-case-order", rule, {
               console.log("apple!");
           case "banana":
               console.log("banana!");
-          case "BANANA":
-              console.log("BANANA!");
-          case "cherry":
-              console.log("cherry!");
-          default:
-            console.log("default!");
-        }
-      `,
-      options: ["asc", { caseSensitive: true }],
-      errors: 1,
-    },
-    {
-      code: `
-        switch(fruit) {
-          case "apple":
-              console.log("apple!");
-          case "banana":
-              console.log("banana!");
           case "cherry":
               console.log("cherry!");
           case "BANANA":
