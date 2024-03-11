@@ -1,10 +1,11 @@
 {
   "name": "eslint-plugin-switch-case-order",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Enforce that case labels in switch statements are sorted",
   "main": "src/index.js",
   "scripts": {
-    "test": "node tests/switch-case-order.test.js"
+    "test": "node tests/switch-case-order.test.js",
+    "lint": "eslint ."
   },
   "keywords": [
     "eslint",
@@ -24,7 +25,8 @@
     "eslint": ">=8.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "eslint-plugin-eslint-plugin": "^5.4.0"
   },
   "license": "MIT"
 }

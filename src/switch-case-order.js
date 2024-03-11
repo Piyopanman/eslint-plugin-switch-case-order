@@ -5,6 +5,10 @@ module.exports = {
       description: "Enforce that case labels in switch statements are sorted",
       url: "",
     },
+    messages: {
+      invalidOrder:
+        'Case labels in switch statement must be in {{ caseSensitive }} {{ natural }} {{ order }}ending order: "{{ current }}" should be before "{{ prev }}"',
+    },
     schema: [
       { enum: ["asc", "desc"] },
       {
@@ -76,8 +80,7 @@ module.exports = {
         ) {
           context.report({
             node,
-            message:
-              'Case labels in switch statement must be in {{ caseSensitive }} {{ natural }} {{ order }}ending order: "{{ current }}" shoud be before "{{ prev }}"',
+            messageId: "invalidOrder",
             data: {
               prev: this.prevLabel,
               current: currentLabel,
